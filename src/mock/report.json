@@ -1,0 +1,21 @@
+{
+  "company": "ABC Valve Manufacturing LLC",
+  "standard": "API Q1",
+  "assessmentScore": {
+    "overall": 68,
+    "dimensions": {
+      "Documentation": 55,
+      "Implementation": 78,
+      "Personnel": 72,
+      "Calibration": 61
+    }
+  },
+  "findings": [],
+  "generatedAt": "2026-05-26T10:00:00Z",
+  "status": "Complete",
+  "auditor": "Elizabeth Thompson",
+  "auditPeriod": {
+    "start": "2026-01-01",
+    "end": "2026-03-31"
+  }
+}

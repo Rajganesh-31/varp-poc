@@ -1,0 +1,146 @@
+[
+  {
+    "id": "RULE-001",
+    "clause": "§1.2.3",
+    "title": "Management Review Requirements",
+    "description": "The quality management system shall include formal management reviews at defined intervals to evaluate system effectiveness, resource adequacy, and compliance with API Q1 requirements. Reviews must document assessment of quality metrics, audit findings, and corrective action effectiveness.",
+    "category": "Management",
+    "importance": "high"
+  },
+  {
+    "id": "RULE-002",
+    "clause": "§2.1.5",
+    "title": "Measurement Equipment Calibration",
+    "description": "All measuring instruments used for product verification and process monitoring must be calibrated against traceable standards at established intervals. Calibration records must demonstrate validity at time of use and contain evidence of NIST traceability.",
+    "category": "Quality",
+    "importance": "critical"
+  },
+  {
+    "id": "RULE-003",
+    "clause": "§3.1.2",
+    "title": "Raw Material Inspection Documentation",
+    "description": "Documentation of raw material inspections, including test results and acceptance records, shall be maintained for a minimum of 3 years. Records must demonstrate that all incoming materials were evaluated against acceptance criteria before use in production.",
+    "category": "Documentation",
+    "importance": "critical"
+  },
+  {
+    "id": "RULE-004",
+    "clause": "§3.2.1",
+    "title": "Material Traceability",
+    "description": "Systems shall enable tracing of materials from supplier receipt through product manufacture to finished goods. Batch numbers and lot identification must be maintained on test reports and be cross-referenceable to incoming material documentation.",
+    "category": "Operations",
+    "importance": "high"
+  },
+  {
+    "id": "RULE-005",
+    "clause": "§4.1.3",
+    "title": "Personnel Competency and Training",
+    "description": "Personnel performing quality-affecting activities shall be trained and evaluated for competency in API Q1 requirements relevant to their role. Training records and competency assessments must be documented and maintained for all quality staff.",
+    "category": "Management",
+    "importance": "critical"
+  },
+  {
+    "id": "RULE-006",
+    "clause": "§5.2.1",
+    "title": "Process Work Instruction Control",
+    "description": "Current approved work instructions shall be available at process points. Obsolete versions must be removed from use areas. All process changes require documentation updates and must be approved before implementation on production.",
+    "category": "Operations",
+    "importance": "high"
+  },
+  {
+    "id": "RULE-007",
+    "clause": "§5.2.4",
+    "title": "Process Capability Studies",
+    "description": "Statistical process capability studies shall be conducted for critical process parameters and product dimensions. Cpk values must be maintained above 1.33 with periodic reassessment when processes are modified or equipment is changed.",
+    "category": "Quality",
+    "importance": "high"
+  },
+  {
+    "id": "RULE-008",
+    "clause": "§5.3.2",
+    "title": "Corrective Action Implementation and Verification",
+    "description": "Corrective actions shall be implemented within defined timelines and verified for effectiveness through re-sampling or re-testing. Effectiveness verification shall demonstrate that recurrence has been prevented.",
+    "category": "Quality",
+    "importance": "high"
+  },
+  {
+    "id": "RULE-009",
+    "clause": "§6.1.4",
+    "title": "Non-Conformance Tracking and Trending",
+    "description": "All discovered non-conformances and defects shall be formally recorded in a tracking system regardless of disposition. Trend analysis shall be performed to identify systemic issues and drive improvement initiatives.",
+    "category": "Documentation",
+    "importance": "critical"
+  },
+  {
+    "id": "RULE-010",
+    "clause": "§7.1.2",
+    "title": "Supplier Qualification and Management",
+    "description": "Suppliers of critical materials shall be evaluated and qualified before purchase orders are issued. Qualification evidence may include API Q1 certification, third-party audit results, or internal assessment. Records must be maintained for all active suppliers.",
+    "category": "Operations",
+    "importance": "high"
+  },
+  {
+    "id": "RULE-011",
+    "clause": "§2.1.1",
+    "title": "Test Equipment Maintenance Records",
+    "description": "Preventive maintenance schedules for all test equipment must be established and followed. Maintenance records shall document service activities, calibration status, and any equipment repairs or modifications.",
+    "category": "Quality",
+    "importance": "high"
+  },
+  {
+    "id": "RULE-012",
+    "clause": "§3.1.5",
+    "title": "Material Certificate of Compliance",
+    "description": "Raw materials shall be accompanied by certificate of compliance or test data demonstrating conformance to specifications. Certificates must be retained with corresponding material batch records.",
+    "category": "Documentation",
+    "importance": "medium"
+  },
+  {
+    "id": "RULE-013",
+    "clause": "§4.2.1",
+    "title": "Personnel Access to Documentation",
+    "description": "Quality personnel shall have access to and understanding of applicable procedures and requirements. Training records shall document comprehension of process requirements and API Q1 standards.",
+    "category": "Management",
+    "importance": "medium"
+  },
+  {
+    "id": "RULE-014",
+    "clause": "§5.1.2",
+    "title": "Process Parameter Control and Monitoring",
+    "description": "Critical process parameters shall be defined, monitored, and controlled within established ranges. Process monitoring data shall be recorded and maintained as quality records.",
+    "category": "Operations",
+    "importance": "high"
+  },
+  {
+    "id": "RULE-015",
+    "clause": "§6.2.1",
+    "title": "Finished Product Testing Requirements",
+    "description": "All products shall be subjected to final inspection and testing in accordance with specifications. Test reports must document test method, acceptance criteria, results, and disposition of tested product.",
+    "category": "Quality",
+    "importance": "critical"
+  },
+  {
+    "id": "RULE-016",
+    "clause": "§7.2.3",
+    "title": "Customer Communication and Notification",
+    "description": "Procedures shall establish methods for communicating quality issues to customers and managing product recalls when non-conformances affect shipped goods. Communication records must be maintained.",
+    "category": "Management",
+    "importance": "critical"
+  },
+  {
+    "id": "RULE-017",
+    "clause": "§8.1.1",
+    "title": "Internal Audit Program",
+    "description": "Internal audits of the quality system shall be conducted at planned intervals to assess compliance with requirements. Audit findings and corrective actions shall be tracked and reviewed.",
+    "category": "Quality",
+    "importance": "high"
+  },
+  {
+    "id": "RULE-018",
+    "clause": "§8.2.2",
+    "title": "Management Action on Audit Findings",
+    "description": "Management shall review internal audit results and determine appropriate corrective actions. Effectiveness of corrective actions shall be verified and documented.",
+    "category": "Management",
+    "importance": "medium"
+  }
+]

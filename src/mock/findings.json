@@ -1,0 +1,122 @@
+[
+  {
+    "id": "FIND-001",
+    "document": "DOC-001",
+    "finding": "Raw material inspection procedures documentation was not maintained for the required 3-year retention period. Records reviewed showed gaps from March through June 2025, with no evidence of inspection activities or corresponding test results for incoming valve components.",
+    "severity": "critical",
+    "clause": "§3.1.2",
+    "impact": "Inability to verify that materials meet API Q1 standards, creating significant risk of undetected defects entering production and compromising product quality assurance.",
+    "recommendation": "Immediately implement centralized document management system with automated retention tracking. Conduct retroactive audit of supplier records for the missing 4-month period to establish baseline documentation.",
+    "section": "Quality Management System",
+    "daysToRemediate": 45,
+    "highlightPhrase": "raw materials"
+  },
+  {
+    "id": "FIND-002",
+    "document": "DOC-002",
+    "finding": "Calibration certificates for pressure testing equipment were expired for 6 out of 12 instruments reviewed. Equipment used for final product testing had calibration validity ending between January and March 2026, yet testing activities continued through May 2026.",
+    "severity": "critical",
+    "clause": "§2.1.5",
+    "impact": "Test data from non-calibrated equipment is unreliable and does not demonstrate product compliance. Previously issued test certificates may be invalid, requiring product recertification or potential customer notification.",
+    "recommendation": "Immediately halt use of non-calibrated instruments and quarantine all products tested with expired equipment. Establish preventive maintenance schedule with 3-month lead time for recalibration cycles.",
+    "section": "Measurement and Test Equipment",
+    "daysToRemediate": 30,
+    "highlightPhrase": "calibration dates"
+  },
+  {
+    "id": "FIND-003",
+    "document": "DOC-003",
+    "finding": "Training records for quality inspectors were incomplete. 8 of 14 inspectors lacked documented evidence of API Q1 training completion. Personnel were actively performing inspections without proof of required competency validation.",
+    "severity": "high",
+    "clause": "§4.1.3",
+    "impact": "Inspections may not meet API Q1 standards due to inadequate personnel training, potentially allowing non-conforming products to pass quality gates and reach customers.",
+    "recommendation": "Enroll all quality inspection personnel in API Q1 certification training within 60 days. Implement training tracking system with automatic expiration alerts and mandatory refresher schedules.",
+    "section": "Personnel Competency",
+    "daysToRemediate": 60,
+    "highlightPhrase": "training requirements"
+  },
+  {
+    "id": "FIND-004",
+    "document": "DOC-001",
+    "finding": "Work instruction document version control was not followed. Production floor observed using Version 1.2 of the valve assembly procedure while the current approved version was 2.4. Five batches of components were processed using superseded instructions.",
+    "severity": "high",
+    "clause": "§5.2.1",
+    "impact": "Production processes may deviate from approved procedures, resulting in inconsistent product quality and potential non-conformance with specification requirements.",
+    "recommendation": "Implement document control system that physically removes outdated work instructions from production areas. Conduct process audit on the 5 affected batches and disposition material accordingly.",
+    "section": "Process Control",
+    "daysToRemediate": 21,
+    "highlightPhrase": "documentation protocols"
+  },
+  {
+    "id": "FIND-005",
+    "document": "DOC-004",
+    "finding": "Non-conformance tracking system was not systematically capturing product defects. Review of inspection reports revealed 3 instances where defects were noted but never formally recorded in the non-conformance database, preventing trend analysis.",
+    "severity": "high",
+    "clause": "§6.1.4",
+    "impact": "Lack of systematic defect tracking prevents identification of recurring quality issues and inhibits corrective action effectiveness. Management lacks visibility into quality trends.",
+    "recommendation": "Audit all recent inspection reports to identify missed non-conformances. Train quality personnel on non-conformance entry procedures and implement daily reconciliation checks between inspection records and database.",
+    "section": "Quality Records",
+    "daysToRemediate": 28,
+    "highlightPhrase": "quality inspection reports"
+  },
+  {
+    "id": "FIND-006",
+    "document": "DOC-002",
+    "finding": "Supplier qualification records lacked evidence of initial audit or certification verification. Four active suppliers had no documented API Q1 compliance status on file, and purchase orders were issued to these suppliers without documented qualification approval.",
+    "severity": "medium",
+    "clause": "§7.1.2",
+    "impact": "Procurement from unqualified suppliers increases risk of receiving non-conforming materials. Lack of supplier oversight diminishes confidence in upstream quality.",
+    "recommendation": "Conduct immediate audit or request API Q1 certification from all four suppliers. Implement supplier qualification checklist for procurement process that flags unqualified vendors.",
+    "section": "Supplier Management",
+    "daysToRemediate": 90,
+    "highlightPhrase": "precision testing instruments"
+  },
+  {
+    "id": "FIND-007",
+    "document": "DOC-005",
+    "finding": "Corrective action requests were not being followed to completion. 6 of 12 open CARs reviewed had no evidence of implementation or verification within their required timelines. Root cause analysis was documented but effectiveness checks were not performed.",
+    "severity": "medium",
+    "clause": "§5.3.2",
+    "impact": "Corrective actions fail to resolve underlying quality issues. Recurring defects are not prevented, resulting in repeated non-conformances and customer dissatisfaction.",
+    "recommendation": "Assign accountability for CAR closure with monthly status reviews. Implement verification sampling requirement for all corrective actions with documented effectiveness assessment.",
+    "section": "Corrective Actions",
+    "daysToRemediate": 45,
+    "highlightPhrase": "corrective actions"
+  },
+  {
+    "id": "FIND-008",
+    "document": "DOC-003",
+    "finding": "Process capability studies for critical dimensions were not current. The most recent Cpk analysis for main valve bore diameter was performed in September 2024, and no formal reassessment has been conducted despite process modifications in February 2026.",
+    "severity": "medium",
+    "clause": "§5.2.4",
+    "impact": "Process capability assumptions may no longer be valid due to equipment changes. Confidence in the ability to consistently meet design specifications is reduced.",
+    "recommendation": "Conduct updated process capability study for critical dimensions within 30 days. Establish requirement for annual Cpk review or re-analysis whenever process parameters are modified.",
+    "section": "Process Capability",
+    "daysToRemediate": 35,
+    "highlightPhrase": "competency validation"
+  },
+  {
+    "id": "FIND-009",
+    "document": "DOC-004",
+    "finding": "Traceability documentation for batch materials was incomplete. Finished product test reports referenced material batch numbers that could not be matched to raw material receiving records. 8 finished units could not be traced to source materials.",
+    "severity": "low",
+    "clause": "§3.2.1",
+    "impact": "If field issues occur, inability to identify and quarantine affected material batches. Traceability failures complicate root cause analysis and customer notification protocols.",
+    "recommendation": "Implement barcode-based material tracking system linking receiving, lot numbers, and finished product test reports. Audit remaining inventory for traceability gaps.",
+    "section": "Traceability and Recall",
+    "daysToRemediate": 75,
+    "highlightPhrase": "identified defects"
+  },
+  {
+    "id": "FIND-010",
+    "document": "DOC-005",
+    "finding": "Management review meeting records lacked documented discussion of quality metrics and performance trends. Minutes from 2 of the 4 quarterly management reviews did not address API Q1 compliance metrics, audit findings, or corrective action effectiveness.",
+    "severity": "low",
+    "clause": "§1.2.3",
+    "impact": "Management lacks formal forum for reviewing quality system performance. Quality objectives and resource allocation decisions may not be informed by compliance data.",
+    "recommendation": "Establish formal agenda template for management reviews that requires discussion of compliance metrics, internal audit results, and CAR status. Document all discussions and decisions.",
+    "section": "Management Review",
+    "daysToRemediate": 14,
+    "highlightPhrase": "management review meeting"
+  }
+]

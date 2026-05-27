@@ -1,0 +1,175 @@
+/**
+ * globals.css — Vegas Audit Platform Design System
+ * Base reset and global structural styles.
+ *
+ * IMPORTANT: All design tokens are defined in tokens.css.
+ * This file must NEVER define raw hex values — use var() only.
+ * This file must NEVER use bg-white, text-black, or light backgrounds.
+ */
+
+@import './tokens.css';
+
+@import "tailwindcss/utilities";
+
+/* =========================================================
+   Box model reset
+   ========================================================= */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* =========================================================
+   Root — full-height single-page app shell
+   ========================================================= */
+
+html,
+body,
+#root {
+  height: 100%;
+  overflow: hidden;
+}
+
+/* =========================================================
+   Base typography — Inter as specified
+   ========================================================= */
+
+body {
+  font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-size: var(--text-size-base);
+  line-height: var(--text-lh-base);
+  background-color: var(--surface-base);
+  color: var(--text-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* =========================================================
+   Scrollbar styling — minimal, theme-consistent
+   ========================================================= */
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-default);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--border-strong);
+}
+
+/* =========================================================
+   Text selection
+   ========================================================= */
+
+::selection {
+  background: var(--brand-muted);
+  color: var(--text-primary);
+}
+
+/* =========================================================
+   Button reset — default browser styles removed
+   ========================================================= */
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+/* =========================================================
+   Form element resets
+   ========================================================= */
+
+input,
+textarea,
+select {
+  font-family: inherit;
+  font-size: inherit;
+}
+
+/* =========================================================
+   Animations — only permitted keyframes from the specification
+   ========================================================= */
+
+/* Content fade-in on mount */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Modal enter */
+@keyframes modalIn {
+  from {
+    opacity: 0;
+    transform: scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Toast slide in from right */
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Toast slide out to right */
+@keyframes slideOut {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+}
+
+/* Pulse used by SkeletonBlock */
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.5; }
+}
+
+.animate-in {
+  animation: fadeIn 150ms ease-out;
+}
+
+.animate-modal-in {
+  animation: modalIn 150ms ease-out;
+}
+
+.animate-toast-in {
+  animation: slideIn 200ms ease-out;
+}
+
+.animate-toast-out {
+  animation: slideOut 200ms ease-in;
+}

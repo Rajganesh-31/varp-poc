@@ -1,0 +1,7 @@
+/**
+ * index.css — DEPRECATED entry-level CSS.
+ *
+ * All styles are now in src/styles/globals.css (imported first in main.tsx).
+ * This file is kept empty to avoid breaking any legacy Vite asset reference
+ * and will be removed in a future cleanup.
+ */

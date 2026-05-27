@@ -1,0 +1,193 @@
+/**
+ * tokens.css — Vegas Audit Platform Design System
+ * Phase 1: Token Foundation
+ *
+ * This file is the single source of truth for all design tokens.
+ * All values are derived directly from the unified design token specification.
+ *
+ * Token groups:
+ *   1. Surface Stack (depth hierarchy)
+ *   2. Border System
+ *   3. Brand Colors
+ *   4. Severity Colors (semantic — critical / high / medium / low)
+ *   5. Text Hierarchy
+ *   6. Status Colors
+ *   7. Typography Scale (size + line-height pairs)
+ *   8. Font Weights
+ *   9. Spacing System (4px base unit)
+ *  10. Border Radius System
+ *  11. Shadow / Elevation System
+ *  12. Z-Index Strategy
+ */
+
+:root {
+  /* =========================================================
+     1. SURFACE STACK — Dark-first depth hierarchy
+     Use dark to recede, light to elevate.
+     Never use these interchangeably or add surfaces outside
+     this stack.
+     ========================================================= */
+
+  --surface-base:     #FFFFFF;   /* app shell */
+  --surface-elevated: #F9FAFB;   /* primary panels, sidebars */
+  --surface-overlay:  #FFFFFF;   /* cards, content containers */
+  --surface-raised:   #F3F4F6;   /* interactive elements, hover states */
+  --surface-float:    #FFFFFF;   /* dropdowns, tooltips, modals */
+
+  /* =========================================================
+     2. BORDER SYSTEM
+     Borders express structural or interactive boundaries only.
+     Never use borders for decoration.
+     ========================================================= */
+
+  --border-subtle:    #E4E4E7;   /* structural dividers */
+  --border-default:   #D4D4D8;   /* component borders */
+  --border-strong:    #A1A1AA;   /* active / focus borders */
+  --border-focus:     #4F6EF7;   /* keyboard focus ring */
+
+  /* =========================================================
+     3. PRIMARY BRAND
+     Brand colors communicate action and active state only.
+     Never use brand colors for decoration.
+     ========================================================= */
+
+  --brand-primary:    #4F6EF7;   /* primary actions, active nav */
+  --brand-hover:      #3B5CE4;   /* hover state of primary */
+  --brand-muted:      #E0E7FF;   /* backgrounds behind primary elements */
+  --brand-subtle:     #EEF2FF;   /* very subtle brand tint */
+
+  /* =========================================================
+     4. SEVERITY COLORS — Semantic only
+     Each severity level has four purpose-specific tokens:
+       -fg:     text and icon color
+       -bg:     card/container background
+       -border: border color
+       -badge:  badge fill / accent line color
+
+     NEVER use these for decoration.
+     NEVER use opacity variants — use the -bg token instead.
+     ========================================================= */
+
+  /* Critical */
+  --severity-critical-fg:     #B91C1C;
+  --severity-critical-bg:     #FEF2F2;
+  --severity-critical-border: #FECACA;
+  --severity-critical-badge:  #EF4444;
+
+  /* High */
+  --severity-high-fg:         #C2410C;
+  --severity-high-bg:         #FFF7ED;
+  --severity-high-border:     #FED7AA;
+  --severity-high-badge:      #F97316;
+
+  /* Medium */
+  --severity-medium-fg:       #B45309;
+  --severity-medium-bg:       #FFFBEB;
+  --severity-medium-border:   #FDE68A;
+  --severity-medium-badge:    #F59E0B;
+
+  /* Low */
+  --severity-low-fg:          #15803D;
+  --severity-low-bg:          #F0FDF4;
+  --severity-low-border:      #BBF7D0;
+  --severity-low-badge:       #22C55E;
+
+  /* =========================================================
+     5. TEXT HIERARCHY
+     Typography color must track semantic level.
+     Never use raw hex colors in components — use these tokens.
+     ========================================================= */
+
+  --text-primary:   #09090B;   /* headings, key labels */
+  --text-secondary: #52525B;   /* body text, descriptions */
+  --text-tertiary:  #71717A;   /* metadata, hints */
+  --text-disabled:  #A1A1AA;   /* disabled states */
+  --text-inverse:   #FAFAFA;   /* text on dark accents */
+
+  /* =========================================================
+     6. STATUS COLORS
+     Functional states: success, warning, error, info.
+     ========================================================= */
+
+  --status-success: #22C55E;
+  --status-warning: #F59E0B;
+  --status-error:   #EF4444;
+  --status-info:    #4F6EF7;
+
+  /* =========================================================
+     7. TYPOGRAPHY SCALE — size / line-height pairs
+     Only these sizes are permitted anywhere in the system.
+     Format: font-size / line-height
+     ========================================================= */
+
+  --text-size-2xs:  10px;   --text-lh-2xs:  14px;   /* timestamps, badges */
+  --text-size-xs:   11px;   --text-lh-xs:   16px;   /* metadata, table headers */
+  --text-size-sm:   12px;   --text-lh-sm:   18px;   /* body text, secondary labels */
+  --text-size-base: 13px;   --text-lh-base: 20px;   /* primary body, nav items */
+  --text-size-md:   14px;   --text-lh-md:   22px;   /* card titles, form labels */
+  --text-size-lg:   16px;   --text-lh-lg:   24px;   /* section headings */
+  --text-size-xl:   20px;   --text-lh-xl:   28px;   /* page headings */
+  --text-size-2xl:  24px;   --text-lh-2xl:  32px;   /* dashboard titles */
+  --text-size-3xl:  32px;   --text-lh-3xl:  40px;   /* score display */
+  --text-size-4xl:  48px;   --text-lh-4xl:  56px;   /* hero scores */
+
+  /* =========================================================
+     8. FONT WEIGHTS — only these four weights are permitted
+     ========================================================= */
+
+  --weight-regular:  400;
+  --weight-medium:   500;
+  --weight-semibold: 600;
+  --weight-bold:     700;
+
+  /* =========================================================
+     9. SPACING SYSTEM — base unit: 4px
+     All spacing values must be multiples of 4px.
+     Never use arbitrary px values in components.
+     ========================================================= */
+
+  --space-1:   4px;
+  --space-2:   8px;
+  --space-3:  12px;
+  --space-4:  16px;
+  --space-5:  20px;
+  --space-6:  24px;
+  --space-8:  32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+
+  /* =========================================================
+     10. BORDER RADIUS SYSTEM
+     Only these values are permitted. Never mix with arbitrary
+     Tailwind radius values.
+     ========================================================= */
+
+  --radius-sm:   4px;     /* badges, chips */
+  --radius-md:   6px;     /* buttons, inputs */
+  --radius-lg:   8px;     /* cards */
+  --radius-xl:   12px;    /* panels, modals */
+  --radius-full: 9999px;  /* pills */
+
+  /* =========================================================
+     11. SHADOW / ELEVATION SYSTEM
+     Shadows express elevation only, never decoration.
+     ========================================================= */
+
+  --shadow-sm:  0 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow-md:  0 4px 8px rgba(0, 0, 0, 0.5);
+  --shadow-lg:  0 8px 24px rgba(0, 0, 0, 0.6);
+  --shadow-xl:  0 16px 48px rgba(0, 0, 0, 0.7);
+
+  /* =========================================================
+     12. Z-INDEX STRATEGY
+     Never use arbitrary z-index values. Always use these tokens.
+     ========================================================= */
+
+  --z-base:    0;
+  --z-raised:  10;
+  --z-overlay: 100;
+  --z-modal:   200;
+  --z-toast:   300;
+  --z-tooltip: 400;
+}

@@ -1,0 +1,10 @@
+/**
+ * variables.css — DEPRECATED
+ *
+ * This file has been superseded by tokens.css.
+ * All design tokens are defined in tokens.css, which is imported
+ * by globals.css as the first and only source of CSS custom properties.
+ *
+ * DO NOT add token definitions here. This file is kept empty to avoid
+ * breaking any legacy imports and will be removed in a future cleanup.
+ */

@@ -1,0 +1,110 @@
+/**
+ * Canonical hex map — MUI theme reads from here; keep in sync with tokens.css.
+ */
+export const tokens = {
+  surface: {
+    base: '#FFFFFF',
+    elevated: '#F9FAFB',
+    overlay: '#FFFFFF',
+    raised: '#F3F4F6',
+    float: '#FFFFFF',
+  },
+  border: {
+    subtle: '#E4E4E7',
+    default: '#D4D4D8',
+    strong: '#A1A1AA',
+    focus: '#4F6EF7',
+  },
+  brand: {
+    primary: '#4F6EF7',
+    hover: '#3B5CE4',
+    muted: '#E0E7FF',
+    subtle: '#EEF2FF',
+  },
+  severity: {
+    critical: { fg: '#B91C1C', bg: '#FEF2F2', border: '#FECACA', badge: '#EF4444' },
+    high: { fg: '#C2410C', bg: '#FFF7ED', border: '#FED7AA', badge: '#F97316' },
+    medium: { fg: '#B45309', bg: '#FFFBEB', border: '#FDE68A', badge: '#F59E0B' },
+    low: { fg: '#15803D', bg: '#F0FDF4', border: '#BBF7D0', badge: '#22C55E' },
+  },
+  text: {
+    primary: '#09090B',
+    secondary: '#52525B',
+    tertiary: '#71717A',
+    disabled: '#A1A1AA',
+    inverse: '#FAFAFA',
+  },
+  status: {
+    success: '#16A34A',
+    warning: '#D97706',
+    error: '#DC2626',
+    info: '#4F6EF7',
+  },
+  typography: {
+    size: {
+      '2xs': '10px',
+      xs: '11px',
+      sm: '12px',
+      base: '13px',
+      md: '14px',
+      lg: '16px',
+      xl: '20px',
+      '2xl': '24px',
+      '3xl': '32px',
+      '4xl': '48px',
+    },
+    lineHeight: {
+      '2xs': '14px',
+      xs: '16px',
+      sm: '18px',
+      base: '20px',
+      md: '22px',
+      lg: '24px',
+      xl: '28px',
+      '2xl': '32px',
+      '3xl': '40px',
+      '4xl': '56px',
+    },
+    weight: {
+      regular: 400,
+      medium: 500,
+      semibold: 600,
+      bold: 700,
+    },
+  },
+  spacing: {
+    1: 4,
+    2: 8,
+    3: 12,
+    4: 16,
+    5: 20,
+    6: 24,
+    8: 32,
+    10: 40,
+    12: 48,
+    16: 64,
+  },
+  radius: {
+    sm: 4,
+    md: 6,
+    lg: 8,
+    xl: 12,
+    full: 9999,
+  },
+  shadow: {
+    sm: '0 1px 2px rgba(0, 0, 0, 0.06)',
+    md: '0 4px 8px rgba(0, 0, 0, 0.08)',
+    lg: '0 8px 24px rgba(0, 0, 0, 0.1)',
+    xl: '0 16px 48px rgba(0, 0, 0, 0.12)',
+  },
+  zIndex: {
+    base: 0,
+    raised: 10,
+    overlay: 100,
+    modal: 200,
+    toast: 300,
+    tooltip: 400,
+  },
+} as const
+
+export type Tokens = typeof tokens
