@@ -10,7 +10,7 @@ Vegas Audit POC is a React/TypeScript/Vite UI for document compliance analysis a
 
 ```bash
 npm run dev          # Vite dev server → http://localhost:3000
-npm run build        # tsc + Vite bundle → dist/
+npm run build        # tsc && vite build → dist/
 npm run type-check   # TypeScript strict check, no emit
 npm run lint         # ESLint on all .ts/.tsx
 npm run preview      # Preview production build
@@ -22,7 +22,7 @@ TypeScript strict mode is on. Fix all type errors; avoid `any`.
 
 ### App Shell
 
-`src/App.tsx` owns top-level page state (`activePage: 'analysis' | 'report'`) and composes all three Context providers. The top bar is 48px (`h-12`); the content area fills the remaining viewport height with `overflow-hidden`. Both modules are conditionally rendered inside the content area.
+`src/App.tsx` owns top-level page state (`activePage: 'analysis' | 'report'`) and composes all three Context providers. `AppShell` (`src/components/layout/AppShell.tsx`) wraps `TopBar` (48px, `h-12`) and the content area (remaining viewport height, `overflow-hidden`). Both modules are conditionally rendered inside the content area.
 
 ### Three-Panel Layouts
 
@@ -34,7 +34,7 @@ Both major modules share the same three-panel pattern:
 - Right (`w-72`): `FindingsPanel` — findings grouped by severity
 - Modal: `FindingDetailModal` — shown on "View Full Details"
 
-State (active document, active view, selected finding, highlighted finding) lives in `DocumentAnalysis` and is passed down max two levels. No Context is used inside this module.
+All state for this module is managed by `useDocumentAnalysisState` (see Hooks). No Context is used inside this module.
 
 **ReportGeneration** (`src/components/ReportGeneration/ReportGeneration.tsx`):
 - Left (`w-56`): `ReportNavigation` — section links
@@ -42,6 +42,32 @@ State (active document, active view, selected finding, highlighted finding) live
 - Right (`w-52`): `CallToActionPanel`
 
 `ReportGeneration` owns `ToastContext.Provider` — children call `useToast()` to trigger notifications.
+
+### Hooks
+
+- **`useDocumentAnalysisState`** — all state + derived data for the DocumentAnalysis module. Composes `useMockData` + `useAnnotationInteraction`. Returns `activeView`, `activeDocument`, `documentFindings`, `selectedFinding`, `highlightedFindingId`, `annotation`, and all handlers.
+- **`useReportGenerationState`** — analogous state for ReportGeneration.
+- **`useDocumentAnalysis`** / **`useReportGeneration`** — thin wrappers that compose the state hooks with additional side-effects or business logic if needed.
+- **`useAnnotationInteraction`** — mutual exclusion between hover tooltip and expanded inline card. Tooltip visible only when no card is expanded; clicking a span expands it and hides the tooltip.
+- **`useMockData`** — single source of truth for all mock data. Returns `{ mockReport, mockFindings, mockRules, mockDocuments, isLoading }` after a simulated 1200ms delay. Components must not import mock JSON directly.
+- **`useToast`** / **`useToastState`** — `useToastState()` creates the toast state at provider level (called once in `ReportGeneration`); `useToast()` consumes it in children. Max 3 toasts, auto-dismiss at 3s.
+- **`useLocalStorage`** — generic hook for persisting state to localStorage.
+
+### Annotation Pipeline
+
+`DocumentViewer` renders inline compliance annotations via:
+1. **`annotationParser.ts`** (`parseAnnotatedContent`) — splits document text into `ContentSegment[]` of `{ type: 'text' }` or `{ type: 'annotation', finding }` by matching `finding.highlightPhrase` in order.
+2. **`AnnotatedDocumentBody`** — renders segments; uses `useAnnotationInteraction` for hover/click state.
+3. **`AnnotationTooltipContent`** — MUI `Tooltip` content shown on hover (suppressed when a card is expanded).
+4. **`AnnotationExpandCard`** — inline expanded card shown on click; dismisses on outside click.
+
+### Common Components (`src/components/common/`)
+
+- **`SeverityBadge`** — uses inline styles (not Tailwind dynamic classes) to prevent Tailwind from purging severity color classes. Follow this same pattern for any component using dynamic severity colors.
+- **`AppDialog`** — wraps MUI `Dialog` with project-standard sizing and backdrop blur.
+- **`FilterChipRow`** — horizontal chip filter bar, used for severity filtering.
+- **`SkeletonBlock`** — loading skeleton using MUI `Skeleton`.
+- **`ToastHost`** — renders the toast stack via `useToast()`.
 
 ### State Management
 
@@ -53,45 +79,43 @@ Three Context providers in `src/context/` compose in `App.tsx`:
 
 Neither module currently reads from these contexts; they exist for future API integration. Both modules load all data via `useMockData()`.
 
-### Data Layer
-
-**`useMockData`** (`src/hooks/useMockData.ts`) is the single source of truth for all mock data. Returns `{ mockReport, mockFindings, mockRules, isLoading }` after a simulated 1200ms delay. Components must not import mock JSON directly.
-
-**`useToast`** / **`useToastState`** (`src/hooks/useToast.ts`): `useToastState()` creates the toast state at provider level (called once in `ReportGeneration`); `useToast()` consumes it in children. Max 3 toasts, auto-dismiss at 3s.
-
 ### Types
 
-**`src/types/index.ts`** is the canonical export for all types. Key types:
+**`src/types/index.ts`** is the canonical export for all types. Always import from `'../types'`. Key types:
 - `Severity` — `'critical' | 'high' | 'medium' | 'low'`
 - `SectionId` — union of report section string literals
 - `Finding`, `Report`, `ComplianceRule`, `Document`, `AssessmentScore`
 
-The individual files (`document.ts`, `finding.ts`, `report.ts`, `compliance.ts`) still exist but `index.ts` re-exports everything. Always import from `'../types'` (resolves to `index.ts`).
-
 ### Design Token System
 
-**`src/styles/tokens.css`** is the single source of truth for all design tokens. It defines:
-- **Surface stack**: `--surface-base` → `--surface-float` (dark-first depth hierarchy)
-- **Border system**: `--border-subtle` / `--border-default` / `--border-strong` / `--border-focus`
-- **Brand colors**: `--brand-primary` (#4F6EF7) and variants
-- **Severity colors**: four tokens per level (`-fg`, `-bg`, `-border`, `-badge`) for critical/high/medium/low
-- **Text hierarchy**: `--text-primary` → `--text-disabled`
-- **Typography scale**: `--text-size-*` / `--text-lh-*` pairs (10px–48px)
-- **Spacing**: `--space-1` (4px) through `--space-16` (64px) — base unit is 4px
-- **Radius**: `--radius-sm` (4px) through `--radius-full`
-- **Shadows**: `--shadow-sm` through `--shadow-xl`
-- **Z-index**: `--z-base` (0) through `--z-tooltip` (400)
+Two layers must be kept in sync:
 
-`src/styles/variables.css` and `src/styles/globals.css` also exist; `tokens.css` is the newer, authoritative file.
+**`src/styles/tokens.css`** — CSS custom properties consumed by the browser. Source of truth for the CSS layer.
 
-**Important constraint**: `SeverityBadge` (`src/components/common/SeverityBadge.tsx`) uses inline styles (not Tailwind dynamic classes) to prevent Tailwind from purging severity color classes. Follow the same pattern for any component using dynamic severity colors.
+**`src/theme/tokenMap.ts`** — JS hex constant map consumed by the MUI theme (`src/theme/theme.ts`). Must mirror `tokens.css` values. Never put raw hex values in components; always reference `theme.palette.*`.
+
+`src/theme/muiAugmentations.d.ts` extends the MUI `Palette` interface to include custom keys (`surface`, `border`, `severity`, `brand`, `textHierarchy`), enabling TypeScript-safe access via `theme.palette.severity.critical.fg` etc.
+
+`src/theme/index.ts` re-exports the theme for use in `main.tsx` (`ThemeProvider`).
+
+Token namespaces:
+- **Surface stack**: `base` → `elevated` → `overlay` → `raised` → `float`
+- **Border**: `subtle` / `default` / `strong` / `focus`
+- **Brand**: `primary` (#4F6EF7) / `hover` / `muted` / `subtle`
+- **Severity**: four tokens per level (`fg`, `bg`, `border`, `badge`) for `critical` / `high` / `medium` / `low`
+- **Text**: `primary` → `secondary` → `tertiary` → `disabled` → `inverse`
+
+`src/styles/variables.css` and `src/styles/globals.css` also exist; `tokens.css` is the newer, authoritative CSS file.
 
 ### Utilities
 
 - **`formatters.ts`** — `formatSeverity()`, `formatScore()`, `formatDate()`, `formatPercentage()`
 - **`calculations.ts`** — `calculateAuditScore()`, `calculateHeatmapValues()`, `groupFindingsBySeverity()`
+- **`scoreTheme.ts`** — `getScoreColor(score, theme)` and `getScoreStatusChip(score, theme)` — derive MUI theme colors from a numeric score.
 - **`validators.ts`** — `validateFinding()`, `validateDocument()`, `validateEmail()`, `validateScore()`
 - **`documentValidator.ts`** — field-level document validation (`validateDocument`, `validateDocuments`, `generateValidationReport`); separate from `validators.ts`
+- **`annotationParser.ts`** — see Annotation Pipeline above.
+- **`constants.ts`** — `SEVERITY_LEVELS`, `FINDING_STATUSES`, `BADGE_VARIANTS`, etc. Note: uses raw hex values; prefer `theme.palette.severity.*` in components instead.
 
 ## Environment Variables
 
@@ -101,105 +125,37 @@ See `.env.example`:
 
 ---
 
-## UI IMPLEMENTATION LAYER (MATERIAL UI + TAILWIND HYBRID)
+## UI Implementation: MUI + Tailwind Hybrid
 
-The Vegas Audit UI supports BOTH:
-- Material UI (MUI) for structured, scalable component architecture
-- Tailwind CSS for rapid layout and spacing
+Material UI is the **primary component framework**. Tailwind is structural scaffolding only.
 
-However, this is NOT a free-for-all. Strict rules apply.
+### MUI component map
 
----
+| Need | Use |
+|---|---|
+| Cards / containers | `Paper`, `Box`, `Stack`, `Grid` |
+| Text | `Typography` |
+| Navigation | `Tabs`, `Drawer` |
+| Inputs | `TextField`, `Select` |
+| Overlays | `Modal`, `Tooltip`, `Popover` |
+| Feedback | `Snackbar`, `Alert` |
+| Badges | `Chip` (custom styled) |
+| Tables, Modals, Panels, Sidebars, Forms | MUI equivalents |
 
-### PRIMARY RULE
+### Tailwind: allowed vs. forbidden
 
-Material UI MUST be the **primary component framework**.
+✅ Allowed: `flex`, `grid`, `gap-*`, `w-*`, `h-*`, `overflow-*`, `max-w-*`, `mx-auto`, positioning utilities.
 
-Tailwind is allowed ONLY for:
-- Layout scaffolding (flex, grid, spacing)
-- Quick structural alignment
-- Minor utility adjustments
+❌ Not allowed: `bg-*`, `text-*`, `border-*`, `shadow-*`, `rounded-*`, `hover:*`, `focus:*` — all visual styling comes from the MUI theme or design tokens.
 
----
+### Styling priority
 
-### WHEN TO USE MATERIAL UI (MANDATORY)
+1. MUI `sx` prop
+2. MUI `styled()`
+3. Tailwind (layout only)
+4. Inline styles (only for dynamic `width`/`height`)
 
-Use MUI components for ALL:
-
-#### Core UI Elements
-- Cards → `Paper`
-- Layout containers → `Box`, `Stack`, `Grid`
-- Text → `Typography`
-- Navigation → `Tabs`, `Drawer`
-- Inputs → `TextField`, `Select`
-- Overlays → `Modal`, `Tooltip`, `Popover`
-- Feedback → `Snackbar`, `Alert`
-- Badges → `Chip` (custom styled)
-
-#### Complex Components
-- Tables
-- Modals
-- Panels
-- Sidebars
-- Form elements
-
----
-
-### WHEN TAILWIND IS ALLOWED
-
-✅ Allowed:
-- `flex`, `grid`, `gap-*`
-- `w-*`, `h-*`
-- `overflow-*`
-- `max-w-*`, `mx-auto`
-- Quick positioning
-
-❌ NOT allowed:
-- Colors (no `bg-*`, `text-*`, `border-*`)
-- Typography
-- Shadows
-- Border radius
-- State styles (hover, active, focus)
-
-👉 ALL visual styling must still come from design tokens or MUI theme.
-
----
-
-### THEME SYSTEM (CRITICAL)
-
-You MUST create a Material UI theme that maps the design tokens:
-
-#### Palette Mapping
-- surface-base → `background.default`
-- surface-overlay → `background.paper`
-- brand → `primary.main`
-
-#### Extend Palette with:
-- severity: { critical, high, medium, low }
-- border levels
-- text hierarchy
-
-#### Enforce:
-- No default MUI blue/purple colors
-- No raw hex values in components
-- No inline color usage outside theme
-
----
-
-### STYLING RULES
-
-Preferred priority:
-
-1. MUI `sx` prop ✅
-2. MUI `styled()` ✅
-3. Tailwind (layout only) ✅
-4. Inline styles ❌ (except dynamic width/height)
-
----
-
-### EXAMPLE USAGE
-
-✅ Correct:
+### Correct usage example
 
 ```tsx
 <Box className="flex items-center gap-2" sx={{ px: 2, py: 1, bgcolor: 'background.paper' }}>
@@ -207,4 +163,4 @@ Preferred priority:
     Section Title
   </Typography>
 </Box>
-``
+```
